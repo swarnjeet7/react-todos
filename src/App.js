@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/header/header";
+import Todos from "./components/todos/todos";
+import AddTodo from "./components/addTodo/addTodo";
+import "./App.css";
 
 function App() {
+  const [total, setTotal] = useState(0);
+  const [todos, setTodos] = useState({});
+  const [showModal, setShowModal] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="TodoApp">
+      <Header totalTodos={total} setShowModal={setShowModal} />
+      <main className="body">
+        <Todos todos={todos} onSetTodos={setTodos} />
+      </main>
+      {showModal && (
+        <AddTodo
+          todos={todos}
+          onClickCloseBtn={setShowModal}
+          onSetTodos={setTodos}
+          total={total}
+          setTotal={setTotal}
+        />
+      )}
     </div>
   );
 }
