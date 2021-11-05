@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
 function AddTodo(props) {
-  const [todo, setTodo] = useState({
-    text: "",
-    date: "",
-    time: "",
-    isComplete: false,
-  });
+  const [todo, setTodo] = useState(props.todo);
   const handleFormSubmit = (event) => {
     const id = props.total + 1;
     event.preventDefault();
@@ -41,6 +36,23 @@ function AddTodo(props) {
       ...obj,
     });
   };
+  const handleEditButton = () => {
+    props.onSetTodos({
+      ...props.todos,
+      [todo.id]: {
+        id: todo.id,
+        ...todo,
+      },
+    });
+    props.onClickCloseBtn(false);
+    setTodo({
+      todo: "",
+      date: "",
+      time: "",
+      isComplete: false,
+    });
+  };
+
   return (
     <div className="modal">
       <form className="form" onSubmit={handleFormSubmit}>
@@ -98,7 +110,13 @@ function AddTodo(props) {
             Is task Completed
           </label>
         </div>
-        <button type="submit">Add Todo</button>
+        {props.isEditMode ? (
+          <button type="button" onClick={handleEditButton}>
+            Edit Task
+          </button>
+        ) : (
+          <button type="submit">Add Todo</button>
+        )}
       </form>
     </div>
   );
