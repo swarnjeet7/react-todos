@@ -51,6 +51,13 @@ function AddTodo(props) {
       time: "",
       isComplete: false,
     });
+    props.setEditTodo({
+      todo: "",
+      date: "",
+      time: "",
+      isComplete: false,
+    });
+    props.setIsEditMode(false);
   };
 
   return (

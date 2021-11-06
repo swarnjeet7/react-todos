@@ -30,6 +30,8 @@ function App() {
           todos={todos}
           onSetTodos={setTodos}
           handleEditTask={handleEditTask}
+          total={total}
+          setTotal={setTotal}
         />
       </main>
       {showModal && (
@@ -40,6 +42,8 @@ function App() {
           onSetTodos={setTodos}
           total={total}
           setTotal={setTotal}
+          setEditTodo={setEditTodo}
+          setIsEditMode={setIsEditMode}
           isEditMode={isEditMode}
         />
       )}

@@ -1,4 +1,5 @@
 import React from "react";
+import Hammer from "react-hammerjs";
 
 function Todo(props) {
   const { text, time, isComplete, id } = props.todo;
@@ -14,19 +15,26 @@ function Todo(props) {
     props.handleEditTask(id);
   };
 
+  const handleDeleteTodo = () => {
+    console.log(props);
+    props.handleDeleteTodo(id);
+  };
+
   return (
-    <div className="todo flex align-center">
-      <input
-        type="checkbox"
-        className="todo-checkbox"
-        checked={isComplete}
-        onChange={handleInputChange}
-      />
-      <span className="todo-text" onDoubleClick={handleEditButton}>
-        {text}
-      </span>
-      <span className="todo-time ml-auto">{time}</span>
-    </div>
+    <Hammer onSwipe={handleDeleteTodo} direction="DIRECTION_HORIZONTAL">
+      <div className="todo flex align-center">
+        <input
+          type="checkbox"
+          className="todo-checkbox"
+          checked={isComplete}
+          onChange={handleInputChange}
+        />
+        <span className="todo-text" onDoubleClick={handleEditButton}>
+          {text}
+        </span>
+        <span className="todo-time ml-auto">{time}</span>
+      </div>
+    </Hammer>
   );
 }
 
