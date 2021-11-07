@@ -1,54 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./components/header/header";
 import Todos from "./components/todos/todos";
-import AddTodo from "./components/addTodo/addTodo";
+import Modal from "./components/modal/modal";
+import { connect } from "react-redux";
 import "./App.css";
 
-function App() {
-  const [total, setTotal] = useState(0);
-  const [todos, setTodos] = useState({});
-  const [showModal, setShowModal] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [editTodo, setEditTodo] = useState({
-    text: "",
-    date: "",
-    time: "",
-    isComplete: false,
-  });
-
-  const handleEditTask = (id) => {
-    setEditTodo(todos[id]);
-    setShowModal(true);
-    setIsEditMode(true);
-  };
-
+function App({ modalsData }) {
   return (
     <div className="TodoApp">
-      <Header totalTodos={total} setShowModal={setShowModal} />
+      <Header />
       <main className="body">
-        <Todos
-          todos={todos}
-          onSetTodos={setTodos}
-          handleEditTask={handleEditTask}
-          total={total}
-          setTotal={setTotal}
-        />
+        <Todos />
       </main>
-      {showModal && (
-        <AddTodo
-          todo={editTodo}
-          todos={todos}
-          onClickCloseBtn={setShowModal}
-          onSetTodos={setTodos}
-          total={total}
-          setTotal={setTotal}
-          setEditTodo={setEditTodo}
-          setIsEditMode={setIsEditMode}
-          isEditMode={isEditMode}
-        />
-      )}
+      {modalsData.isModalOpen && <Modal />}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    modalsData: state.modalsData,
+  };
+};
+
+export default connect(mapStateToProps, null)(App);

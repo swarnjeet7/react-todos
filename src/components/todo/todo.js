@@ -1,22 +1,24 @@
 import React from "react";
 import Hammer from "react-hammerjs";
+import { connect } from "react-redux";
+import { editTodo } from "../../redux/todos/todosActions";
+import { setModalTodo } from "../../redux/general/generalActions";
 
 function Todo(props) {
   const { text, time, isComplete, id } = props.todo;
 
   const handleInputChange = () => {
-    props.onUpdateTodo({
+    props.editTodo({
       ...props.todo,
       isComplete: !isComplete,
     });
   };
 
-  const handleEditButton = () => {
-    props.handleEditTask(id);
+  const handleEdit = () => {
+    props.handleEditTodo(props.todo);
   };
 
   const handleDeleteTodo = () => {
-    console.log(props);
     props.handleDeleteTodo(id);
   };
 
@@ -29,7 +31,7 @@ function Todo(props) {
           checked={isComplete}
           onChange={handleInputChange}
         />
-        <span className="todo-text" onDoubleClick={handleEditButton}>
+        <span className="todo-text" onDoubleClick={handleEdit}>
           {text}
         </span>
         <span className="todo-time ml-auto">{time}</span>
@@ -38,4 +40,9 @@ function Todo(props) {
   );
 }
 
-export default Todo;
+const mapDispatchToProps = (dispatch) => ({
+  editTodo: (todo) => dispatch(editTodo(todo)),
+  handleEditTodo: (todo) => dispatch(setModalTodo(todo)),
+});
+
+export default connect(null, mapDispatchToProps)(Todo);

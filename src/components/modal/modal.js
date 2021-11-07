@@ -1,25 +1,29 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { addTodo, editTodo } from "../../redux/todos/todosActions";
+import { setGeneralInitialState } from "../../redux/general/generalActions";
+import * as constants from "../../constant/constants";
 
-function AddTodo(props) {
+function Modal(props) {
   const [todo, setTodo] = useState(props.todo);
+
+  const makeId = () => {
+    let id = new Date().toLocaleString().replace(/[/|, |:]/g, "_");
+    return id;
+  };
+
   const handleFormSubmit = (event) => {
-    const id = props.total + 1;
     event.preventDefault();
-    props.onSetTodos({
+    const id = makeId();
+    props.addTodo({
       ...props.todos,
       [id]: {
         id,
         ...todo,
       },
     });
-    props.setTotal(props.total + 1);
-    props.onClickCloseBtn(false);
-    setTodo({
-      todo: "",
-      date: "",
-      time: "",
-      isComplete: false,
-    });
+    setTodo(constants.DEFAULT_TODO);
+    handleCloseButton();
   };
   const handleInputChange = (event) => {
     const { target } = event;
@@ -37,36 +41,19 @@ function AddTodo(props) {
     });
   };
   const handleEditButton = () => {
-    props.onSetTodos({
-      ...props.todos,
-      [todo.id]: {
-        id: todo.id,
-        ...todo,
-      },
-    });
-    props.onClickCloseBtn(false);
-    setTodo({
-      todo: "",
-      date: "",
-      time: "",
-      isComplete: false,
-    });
-    props.setEditTodo({
-      todo: "",
-      date: "",
-      time: "",
-      isComplete: false,
-    });
-    props.setIsEditMode(false);
+    props.editTodo(todo);
+    setTodo(constants.DEFAULT_TODO);
+    handleCloseButton();
+  };
+
+  const handleCloseButton = () => {
+    props.handleCloseModal();
   };
 
   return (
     <div className="modal">
       <form className="form" onSubmit={handleFormSubmit}>
-        <span
-          className="btn-close"
-          onClick={() => props.onClickCloseBtn(false)}
-        >
+        <span className="btn-close" onClick={handleCloseButton}>
           &times;
         </span>
         <h2 className="title">Add you todo</h2>
@@ -129,4 +116,18 @@ function AddTodo(props) {
   );
 }
 
-export default AddTodo;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+    todo: state.modalsData.todo,
+    isEditMode: state.modalsData.isEditMode,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addTodo: (todo) => dispatch(addTodo(todo)),
+  editTodo: (todo) => dispatch(editTodo(todo)),
+  handleCloseModal: () => dispatch(setGeneralInitialState()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

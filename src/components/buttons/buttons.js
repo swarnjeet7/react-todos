@@ -1,12 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setModalVisibility } from "../../redux/general/generalActions";
 
-export const ButtonRound = (props) => {
+const ButtonRound = (props) => {
   const handleButtonClick = () => {
-    props.setShowModal(true);
+    props.setModalVisibility(true);
   };
+
   return (
     <button className="btn-round" onClick={handleButtonClick}>
       {props.children}
     </button>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setModalVisibility: (visibility) =>
+      dispatch(setModalVisibility(visibility)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ButtonRound);
