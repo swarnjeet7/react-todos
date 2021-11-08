@@ -1,10 +1,11 @@
 import React from "react";
-import DateTime from "../dateTime/dateTime";
-import ButtonRound from "../buttons/buttons";
 import { connect } from "react-redux";
+import DateTime from "../dateTime/dateTime";
+import ButtonRound from "../buttons/buttonRound";
 
 function Header(props) {
   const totalTodos = Object.keys(props.todos).length;
+
   return (
     <header className="header">
       <div className="flex justify-between">

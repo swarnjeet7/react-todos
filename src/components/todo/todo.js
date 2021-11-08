@@ -1,8 +1,8 @@
 import React from "react";
 import Hammer from "react-hammerjs";
 import { connect } from "react-redux";
-import { editTodo } from "../../redux/todos/todosActions";
-import { setModalTodo } from "../../redux/general/generalActions";
+import { editTodo, deleteTodo } from "../../redux/todos/todosActions";
+import { setModalTodo } from "../../redux/modal/modalsActions";
 
 function Todo(props) {
   const { text, time, isComplete, id } = props.todo;
@@ -19,7 +19,7 @@ function Todo(props) {
   };
 
   const handleDeleteTodo = () => {
-    props.handleDeleteTodo(id);
+    props.deleteTodo(id);
   };
 
   return (
@@ -43,6 +43,7 @@ function Todo(props) {
 const mapDispatchToProps = (dispatch) => ({
   editTodo: (todo) => dispatch(editTodo(todo)),
   handleEditTodo: (todo) => dispatch(setModalTodo(todo)),
+  deleteTodo: (id) => dispatch(deleteTodo(id)),
 });
 
 export default connect(null, mapDispatchToProps)(Todo);

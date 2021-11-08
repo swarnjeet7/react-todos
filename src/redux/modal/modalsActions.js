@@ -17,3 +17,10 @@ export const setGeneralInitialState = () => {
     type: "SET_GENERAL_INITIAL_STATE",
   };
 };
+
+export const showToast = (visibility) => {
+  return {
+    type: "SHOW_TOAST",
+    visibility,
+  };
+};

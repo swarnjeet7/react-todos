@@ -8,10 +8,20 @@ const todosReducer = (state = INITIAL_STATE, action) => {
     case "EDIT_TODO":
       return handleEditTodo(state, action.payload);
 
+    case "DELETE_TODO":
+      return handleDeleteTodo(state, action.payload);
+
     default:
       return state;
   }
 };
+
+function handleDeleteTodo(state, id) {
+  delete state[id];
+  return {
+    ...state,
+  };
+}
 
 function handleEditTodo(state, todo) {
   console.log(state.todos, "state");

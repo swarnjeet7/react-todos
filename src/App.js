@@ -1,11 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 import Header from "./components/header/header";
 import Todos from "./components/todos/todos";
 import Modal from "./components/modal/modal";
-import { connect } from "react-redux";
+import Toast from "./components/toast/toast";
 import "./App.css";
 
-function App({ modalsData }) {
+function App({ modalsData, showToast }) {
   return (
     <div className="TodoApp">
       <Header />
@@ -13,6 +14,7 @@ function App({ modalsData }) {
         <Todos />
       </main>
       {modalsData.isModalOpen && <Modal />}
+      {showToast && <Toast />}
     </div>
   );
 }

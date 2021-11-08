@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
 import todosReducer from "./todos/todosReducer";
-import generalReducer from "./general/generalReducer";
+import modalReducer from "./modal/modalsReducer";
 
 export default combineReducers({
   todos: todosReducer,
-  modalsData: generalReducer,
+  modalsData: modalReducer,
 });

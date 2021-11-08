@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setModalVisibility } from "../../redux/general/generalActions";
+import { setModalVisibility } from "../../redux/modal/modalsActions";
 
 const ButtonRound = (props) => {
   const handleButtonClick = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTodo, editTodo } from "../../redux/todos/todosActions";
-import { setGeneralInitialState } from "../../redux/general/generalActions";
+import { setGeneralInitialState } from "../../redux/modal/modalsActions";
 import * as constants from "../../constant/constants";
 
 function Modal(props) {
