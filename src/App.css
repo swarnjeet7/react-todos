@@ -162,3 +162,38 @@
   color: #dd1b1b;
   font-size: 18px;
 }
+
+/* toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 99;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  color: whitesmoke;
+  transform: translateY(calc(100% + 30px));
+  animation-name: slideUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(calc(100% + 30px));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.toast-text {
+  padding-right: 20px;
+}
+.toast-link {
+  color: #888aff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

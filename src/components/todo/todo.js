@@ -3,6 +3,7 @@ import Hammer from "react-hammerjs";
 import { connect } from "react-redux";
 import { editTodo, deleteTodo } from "../../redux/todos/todosActions";
 import { setModalTodo } from "../../redux/modal/modalsActions";
+import { showToast } from "../../redux/toast/toastsActions";
 
 function Todo(props) {
   const { text, time, isComplete, id } = props.todo;
@@ -19,7 +20,9 @@ function Todo(props) {
   };
 
   const handleDeleteTodo = () => {
+    props.showToast(false);
     props.deleteTodo(id);
+    props.showToast(true, props.todo, props.index);
   };
 
   return (
@@ -44,6 +47,8 @@ const mapDispatchToProps = (dispatch) => ({
   editTodo: (todo) => dispatch(editTodo(todo)),
   handleEditTodo: (todo) => dispatch(setModalTodo(todo)),
   deleteTodo: (id) => dispatch(deleteTodo(id)),
+  showToast: (visibility, todo, index) =>
+    dispatch(showToast(visibility, todo, index)),
 });
 
 export default connect(null, mapDispatchToProps)(Todo);

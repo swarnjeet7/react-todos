@@ -5,10 +5,11 @@ export const addTodo = (todo) => {
   };
 };
 
-export const editTodo = (todo) => {
+export const editTodo = (todo, index) => {
+  console.log(index, todo);
   return {
     type: "EDIT_TODO",
-    payload: todo,
+    payload: { todo, index },
   };
 };
 

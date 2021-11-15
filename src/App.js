@@ -6,7 +6,7 @@ import Modal from "./components/modal/modal";
 import Toast from "./components/toast/toast";
 import "./App.css";
 
-function App({ modalsData, showToast }) {
+function App({ modalsData, toastsData }) {
   return (
     <div className="TodoApp">
       <Header />
@@ -14,7 +14,7 @@ function App({ modalsData, showToast }) {
         <Todos />
       </main>
       {modalsData.isModalOpen && <Modal />}
-      {showToast && <Toast />}
+      {toastsData.showToast && <Toast delay={5000} />}
     </div>
   );
 }
@@ -22,6 +22,7 @@ function App({ modalsData, showToast }) {
 const mapStateToProps = (state) => {
   return {
     modalsData: state.modalsData,
+    toastsData: state.toastsData,
   };
 };
 

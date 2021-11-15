@@ -1,5 +1,5 @@
 export const DEFAULT_TODO = {
-  todo: "",
+  text: "",
   date: "",
   time: "",
   isComplete: false,

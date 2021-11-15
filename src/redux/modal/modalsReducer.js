@@ -11,19 +11,10 @@ const generalReducer = (state = constants.INITIAL_GENERAL_STATE, action) => {
     case "SET_MODAL_TODO":
       return handleSetModalTodo(state, action.payload);
 
-    case "SHOW_TOAST":
-      return handleShowToast(state, action.payload);
-
     default:
       return state;
   }
 };
-
-function handleShowToast(state, visibility) {
-  return {
-    state,
-  };
-}
 
 function handleSetModalTodo(state, todo) {
   return {

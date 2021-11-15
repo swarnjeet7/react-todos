@@ -4,7 +4,7 @@ import Todo from "../todo/todo";
 
 function Todos({ todos }) {
   return Object.keys(todos).map((key, i) => (
-    <Todo key={key} todo={todos[key]} />
+    <Todo key={key} todo={todos[key]} index={i} />
   ));
 }
 

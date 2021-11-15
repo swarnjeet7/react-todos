@@ -1,3 +1,4 @@
+import * as utils from "../../util/util";
 const INITIAL_STATE = {};
 
 const todosReducer = (state = INITIAL_STATE, action) => {
@@ -23,12 +24,10 @@ function handleDeleteTodo(state, id) {
   };
 }
 
-function handleEditTodo(state, todo) {
-  console.log(state.todos, "state");
-  return {
-    ...state,
-    [todo.id]: todo,
-  };
+function handleEditTodo(state, payload) {
+  const { todo, index = null } = payload;
+  const newState = utils.editTodo(state, todo, index);
+  return newState;
 }
 
 function handleAddTodo(state, todo) {
