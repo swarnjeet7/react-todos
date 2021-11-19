@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Notification from "./util/notification";
 import Header from "./components/header/header";
 import Todos from "./components/todos/todos";
 import Modal from "./components/modal/modal";
